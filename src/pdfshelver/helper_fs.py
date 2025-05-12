@@ -44,4 +44,4 @@ def copy_file(src: str | Path, dest: str | Path) -> str:
         raise RuntimeError(
             f"{src} must be a file, but it is not. Does it exist? Is it a directory?"
         )
-    return resname
+    return str(dpath)
