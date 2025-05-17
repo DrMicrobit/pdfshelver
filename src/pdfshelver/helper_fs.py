@@ -34,7 +34,7 @@ def copy_file(src: str | Path, dest: str | Path) -> str:
 
     if spath.is_file():
         tpath = dpath.with_name(f"{dpath.name}.tmp")  # bad, should use real tmp name
-        resname: str = shutil.copy2(spath, tpath)
+        resname: Path | str = shutil.copy2(spath, tpath)
         if not Path(resname).is_file():
             raise RuntimeError(
                 f"Could not copy file {spath} to destination {dpath}, aborting.",

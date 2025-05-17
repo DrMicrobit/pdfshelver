@@ -85,23 +85,23 @@ wheels = [
 
 [[package]]
 name = "dm-ollamalib"
-version = "0.0.3"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ollama" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9a/c3/bac4774907489d558b82e20ca723faa724dbdc1e39cc605c342d12bec843/dm_ollamalib-0.0.3.tar.gz", hash = "sha256:1639ecea836671cd474251451707a80d409156cf23f838854908857648d0768c", size = 25812, upload-time = "2025-02-03T12:55:55.535Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/97/2a/c3487bdf3710118255fc9372533654d4a8b436d8b9169a1dc14033ec3961/dm_ollamalib-0.2.0.tar.gz", hash = "sha256:b5bcbd5d3a757c938cc4e7879b05781afc713ee9b3d02c8698a383b45640c823", size = 28954, upload-time = "2025-05-15T16:27:29.389Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3d/3e/f00116da15a4a951a3017935d7fc962824eefa0b045a4291ae8d79d42aa6/dm_ollamalib-0.0.3-py3-none-any.whl", hash = "sha256:7e2b8ed9530eb84b9c4cb6b93831f80b2cacd7db796351c4ada366b6c6db0994", size = 9000, upload-time = "2025-02-03T12:55:54.383Z" },
+    { url = "https://files.pythonhosted.org/packages/66/49/bdc25864af12873f15b5ecfcd19949ee4db7227e6c69ef7899188ebcf3b4/dm_ollamalib-0.2.0-py3-none-any.whl", hash = "sha256:460025300f4a9598671f957da22850175c56292bd213bd95b6cf6493641b541a", size = 10102, upload-time = "2025-05-15T16:27:28.311Z" },
 ]
 
 [[package]]
 name = "dm-streamvalve"
-version = "0.0.6"
+version = "0.1.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/47/73/13431525803b3bbe45af1b66558d6bc1b525b0b5084336974e2eb82f60be/dm_streamvalve-0.0.6.tar.gz", hash = "sha256:6fa2b2068421089641e25e1bd7cb345d8bc113567a6d3f55a690c920694ef326", size = 28335, upload-time = "2025-02-03T11:37:48.749Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/da/36/06f732f6255ea193b8b4c1212257b528155ac416c766f220a6b625bb5c9a/dm_streamvalve-0.1.1.tar.gz", hash = "sha256:ca7c6c5cc81d5486cd47923dbfc3179c6d1d756c9e3f40031a9ee1a326521a5b", size = 29606, upload-time = "2025-05-14T18:35:46.552Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/74/e9/f3dadc09dc85044532211f3c5ce3dd5f7c954063fcf9a080c9d499be9449/dm_streamvalve-0.0.6-py3-none-any.whl", hash = "sha256:6319b75360cdfb6cdcd21e465436a035db8c7e136a722cd17b9bb549230b978b", size = 9450, upload-time = "2025-02-03T11:37:47.034Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/ed/4560f0eb3bcc5d93ab1fcc49817bc6e9c6eccd35d1bd5917a309959c2353/dm_streamvalve-0.1.1-py3-none-any.whl", hash = "sha256:5b42ff66214be52d75f249ac1061a5fbb37c3ee6b3b543c7cf60c33715b2c180", size = 9577, upload-time = "2025-05-14T18:35:45.032Z" },
 ]
 
 [[package]]
@@ -227,8 +227,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dm-ollamalib", specifier = ">=0.0.3" },
-    { name = "dm-streamvalve", specifier = ">=0.0.6" },
+    { name = "dm-ollamalib", specifier = ">=0.2.0" },
+    { name = "dm-streamvalve", specifier = ">=0.1.1" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "ocrmac", specifier = ">=1.0.0" },
     { name = "ollama", specifier = ">=0.4.8" },

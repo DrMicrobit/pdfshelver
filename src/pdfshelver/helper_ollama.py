@@ -22,7 +22,7 @@ def setup_ollama(
 
     try:
         client = ollama.Client(host=host)
-        ostream: Iterable[ollama.ChatResponse] = client.chat(
+        ostream: Iterable[ollama.ChatResponse] = client.chat(  # pyright: ignore[reportUnknownMemberType]
             model=model,
             messages=[
                 {"role": "system", "content": sysmsg},
@@ -56,6 +56,7 @@ def run_ostream_via_streamvalve(
     ostream: Iterable[ollama.ChatResponse],
     max_linerepeats: int = 0,
     max_lines: int = 0,
+    max_linetokens: int = 0,
     max_paragraphs: int = 0,
     monitor_callback: Callable[[str], None] | None = None,
 ) -> dict[str, Any]:
@@ -88,6 +89,7 @@ def run_ostream_via_streamvalve(
         callback_token=monitor_callback,
         max_linerepeats=max_linerepeats,
         max_lines=max_lines,
+        max_linetokens=max_linetokens,
         max_paragraphs=max_paragraphs,
     )
     ret = sv.process()
@@ -126,6 +128,7 @@ def get_ollama_response(
             ostream,
             max_linerepeats=3,
             max_lines=200,
+            max_linetokens=1000,
             max_paragraphs=20,
             monitor_callback=monitor,
         )

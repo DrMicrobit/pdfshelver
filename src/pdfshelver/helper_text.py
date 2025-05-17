@@ -2,8 +2,13 @@
 
 import re
 
+# OCRMac unfortunately does not make this type available. Fake an own one.
+#  (and hope it does not change in OCRMac)
+# May 2025: type ignore because my mypy doesn't know PEP 695 yet (Python 3.12+).
+type OCRMacRecognize = list[tuple[str, float, tuple[float, float, float, float]]]  # type: ignore[valid-type]
 
-def reconstruct_lines(annotations: list, ywiggle: float = 0.003) -> list[str]:
+
+def reconstruct_lines(annotations: OCRMacRecognize, ywiggle: float = 0.003) -> list[str]:
     """Taking the annotations from ocrmac, reconstruct a text line by line,
     from left to right, top to bottom.
 

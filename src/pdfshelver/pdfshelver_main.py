@@ -1,6 +1,7 @@
 """PDFShelver main code file"""
 
 import argparse
+import importlib.metadata
 import json
 import os
 import sys
@@ -11,7 +12,7 @@ from pathlib import Path
 import ollama
 from dm_ollamalib.optionhelper import help_long, help_overview, to_ollama_options
 from ocrmac import ocrmac  # type: ignore[import-untyped]
-from pdf2image import convert_from_path
+from pdf2image import convert_from_path  # pyright: ignore[reportUnknownVariableType]
 
 from pdfshelver.cmdline_parser import parse_cmd_line
 from pdfshelver.config import (
@@ -30,6 +31,8 @@ from pdfshelver.helper_knowledgebase import (
 from pdfshelver.helper_ollama import get_ollama_response
 from pdfshelver.helper_text import llm_to_metainfodict, reconstruct_lines
 
+__version__ = importlib.metadata.version("pdfshelver")
+
 # Textual content recovered via OCR from PDF will be stored as this type
 # Outer list: pages
 # Inner list: single lines of a page
@@ -44,6 +47,9 @@ def early_exits(opts: argparse.Namespace) -> None:
         sys.exit(0)
     if opts.optdesc:
         print(help_long())
+        sys.exit(0)
+    if opts.version:
+        print(__version__)
         sys.exit(0)
 
     if opts.msgs:
@@ -71,7 +77,7 @@ def early_exits(opts: argparse.Namespace) -> None:
 def get_ollama_options(oopts: str) -> ollama.Options:
     """quick check of --opt for an early bail out if there's an error there."""
     try:
-        oparams: ollama.Options = to_ollama_options(oopts)  # type: ignore[assignment]
+        oparams: ollama.Options = to_ollama_options(oopts)
     except ValueError as e:
         print(e)
         print("Aborting.", file=sys.stderr)
@@ -85,11 +91,15 @@ def get_pdf_content(fname: str) -> Ocrcontent:
     with tempfile.TemporaryDirectory() as path:
         images_from_path = convert_from_path(fname, output_folder=path)
 
-        annotations = []
+        # I have no idea how to get this right without quietening pyright / pylance
         for img in images_from_path:
-            annotations = ocrmac.OCR(img, framework="livetext").recognize()
-            retval.append(reconstruct_lines(annotations))
-    return retval
+            annotations = ocrmac.OCR(  # pyright: ignore[reportUnknownVariableType,reportUnknownMemberType]
+                img, framework="livetext"
+            ).recognize()
+            retval.append(  # pyright: ignore[reportUnknownMemberType]
+                reconstruct_lines(annotations)  # pyright: ignore[reportUnknownArgumentType]
+            )
+    return retval  # pyright: ignore[reportUnknownVariableType]
 
 
 def append_pdfcontent_to_usrmsg(usrmsg: str, pdfc: Ocrcontent) -> str:
@@ -215,6 +225,7 @@ def pdfshelver_mainworkflow(
         usrmsg = append_pdfcontent_to_usrmsg(usrmsg, pdfcontent)
         print(sysmsg, usrmsg)
 
+        metainf = {}
         for model in [m.strip() for m in models.split(",")]:
             print(f"Now running Ollama model {model}")
             metaraw = get_ollama_response(

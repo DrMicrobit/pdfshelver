@@ -19,8 +19,8 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "dm-ollamalib>=0.0.3",
-    "dm-streamvalve>=0.0.6",
+    "dm-ollamalib>=0.2.0",
+    "dm-streamvalve>=0.1.1",
     "httpx>=0.28.1",
     "ocrmac>=1.0.0",
     "ollama>=0.4.8",

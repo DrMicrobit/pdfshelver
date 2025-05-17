@@ -148,6 +148,9 @@ pdfshelver --rebuildkb
 - Only the first two pages of each PDF are used for LLM metadata extraction as the metadata to be extracted is often found there. Using more pages often confuses small LLMs and leads to worse performance regarding the quality of their answer.
 - All metadata and OCR text are stored alongside the original PDF for future reference, but not stored within the PDF. I.e., no PDF/A is created.
 - LLMs sometimes take ... astonishing decisions when processing a document. Expect the results to be "mostly right", but not always 100% correct.
+- Especially the "sender" information extracted could use a 2nd step polishing as it may vary wildly. E.g., in one document
+the LLM might extract "Big Company LLC" as sender, while in a document with same headers but different textual content it
+might be extracted as "Big Company", or "BigCo", or "BigCo Shipping", or, or, or ...
 
  
 ## Troubleshooting
