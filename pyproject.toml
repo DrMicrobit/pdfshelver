@@ -1,6 +1,6 @@
 [project]
 name = "pdfshelver"
-version = "0.1.2"
+dynamic = ["version"]
 description = "Helps you turn a pile of scanned PDFs into a searchable, browsable categorized digital archive - automatically"
 readme = "README.md"
 authors = [{ name = "Bastien Chevreux", email = "bach@chevreux.org" }]
@@ -31,8 +31,14 @@ dependencies = [
 pdfshelver = "pdfshelver:cli_entry"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
+
+[tool.uv-dynamic-versioning]
+fallback-version = "0.0.0"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
 
 [dependency-groups]
 dev = ["pytest-cov>=6.1.1"]
